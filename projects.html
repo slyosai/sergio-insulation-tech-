@@ -690,69 +690,6 @@ a:hover, p a:hover {color: #EF3340;}
       margin: 0 0 24px 0;
     }
 
-    /* Filter Bar */
-    .filter-bar {
-      position: sticky;
-      top: 0;
-      z-index: 90;
-      background: rgba(28, 31, 42, 0.96);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 16px 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .filter-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .filter-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .filter-pill {
-      font-family: dm-sans, sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-pill:hover {
-      background: rgba(239, 51, 64, 0.15);
-      border-color: #EF3340;
-      color: #ffffff;
-    }
-    .filter-pill.active {
-      background: #EF3340;
-      border-color: #EF3340;
-      color: #ffffff;
-    }
-    .search-input {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-      padding: 8px 14px;
-      color: #ffffff;
-      font-family: dm-sans, sans-serif;
-      font-size: 13px;
-      outline: none;
-      min-width: 240px;
-    }
-    .search-input:focus {
-      border-color: #EF3340;
-    }
-
     /* Gallery Grid */
     .gallery-grid {
       max-width: 1300px;
@@ -989,24 +926,6 @@ a:hover, p a:hover {color: #EF3340;}
     <p>
       Browse authentic jobsite photography from completed commercial and industrial mechanical insulation contracts across Southern California by <strong>Sergio Lopez</strong>. Chilled water loops, steam boilers, HVAC duct wrap, custom removable blankets, and UL firestopping.
     </p>
-  </section>
-
-  <!-- Filter & Search Bar -->
-  <section class="filter-bar">
-    <div class="filter-container">
-      <div class="filter-group">
-        <button class="filter-pill active" onclick="filterGallery('all', event)">All Photos (142)</button>
-        <button class="filter-pill" onclick="filterGallery('chilled', event)">Chilled Water</button>
-        <button class="filter-pill" onclick="filterGallery('steam', event)">Steam &amp; Boilers</button>
-        <button class="filter-pill" onclick="filterGallery('duct', event)">HVAC Duct Wrap</button>
-        <button class="filter-pill" onclick="filterGallery('blankets', event)">Removable Blankets</button>
-        <button class="filter-pill" onclick="filterGallery('jacketing', event)">Metal Jacketing</button>
-        <button class="filter-pill" onclick="filterGallery('firestop', event)">UL Firestop</button>
-      </div>
-      <div>
-        <input type="text" class="search-input" id="searchBox" placeholder="Search spec, chiller, steam..." oninput="handleSearch(this.value)">
-      </div>
-    </div>
   </section>
 
   <!-- Gallery Grid -->
@@ -3600,33 +3519,6 @@ a:hover, p a:hover {color: #EF3340;}
   </footer>
 
   <script>
-    let currentCategory = 'all';
-    let currentSearch = '';
-
-    function updateGrid() {
-      const cards = document.querySelectorAll('.project-card');
-      cards.forEach(card => {
-        const matchesCategory = (currentCategory === 'all' || card.classList.contains(currentCategory));
-        const text = card.innerText.toLowerCase();
-        const matchesSearch = (!currentSearch || text.includes(currentSearch));
-        card.style.display = (matchesCategory && matchesSearch) ? 'flex' : 'none';
-      });
-    }
-
-    function filterGallery(category, event) {
-      currentCategory = category;
-      document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
-      if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-      }
-      updateGrid();
-    }
-
-    function handleSearch(val) {
-      currentSearch = val.trim().toLowerCase();
-      updateGrid();
-    }
-
     function openModal(src, title, badge) {
       const modal = document.getElementById('imageModal');
       document.getElementById('modalImg').src = src;
